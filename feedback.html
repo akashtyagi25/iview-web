@@ -3,47 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>App Feedback Form</title>
+    <title>IView - App Feedback</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .feedback-form {
+        :root {
+            --primary-color: #FF5E94; /* Pink */
+            --secondary-color: #121212; /* Dark background */
+            --accent-color: #00E0FF; /* Cyan */
+            --gradient-start: #FF5E94;
+            --gradient-end: #FF9950; /* Orange */
+            --text-color: #E0E0E0;
+            --card-color: #1E1E1E;
+            --border-color: #333333;
+            --star-color: #FFD700; /* Gold */
+            --success-color: #64FFDA; /* Teal */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 94, 148, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 224, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 153, 80, 0.05) 0%, transparent 30%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 94, 148, 0.2) 0%, transparent 70%);
+            top: -20px;
+            left: 10%;
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 8s infinite alternate;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(0, 224, 255, 0.2) 0%, transparent 70%);
+            bottom: 0;
+            right: 10%;
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 6s infinite alternate-reverse;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0.2;
+            }
+        }
+        
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        header h1::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        header p {
+            color: #BBB;
+            font-size: 1.3rem;
+            font-weight: 500;
             max-width: 600px;
-            margin: 40px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+        
+        .feedback-form {
+            max-width: 650px;
+            margin: 40px auto 60px;
+            padding: 40px;
+            background: var(--card-color);
+            border-radius: 24px;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        
+        .feedback-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            z-index: 2;
+        }
+        
+        .feedback-form::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 94, 148, 0.1) 0%, transparent 70%);
+            top: -150px;
+            right: -150px;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+        
+        .form-header h2 {
+            color: var(--text-color);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .form-header p {
+            color: #999;
+            font-size: 1.1rem;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 28px;
+            position: relative;
         }
         
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
         }
         
         input, textarea, select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: inherit;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            font-family: 'Quicksand', sans-serif;
             font-size: 16px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 94, 148, 0.2);
+            outline: none;
+            background: rgba(0, 0, 0, 0.3);
         }
         
         textarea {
-            min-height: 150px;
+            min-height: 160px;
             resize: vertical;
+            line-height: 1.6;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 20px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus + .input-icon,
+        textarea:focus + .input-icon,
+        select:focus + .input-icon {
+            color: var(--accent-color);
+            transform: translateY(-50%) scale(1.2);
+        }
+        
+        .rating-container {
+            margin-top: 15px;
+            position: relative;
         }
         
         .rating {
             display: flex;
             flex-direction: row-reverse;
-            justify-content: flex-end;
+            justify-content: center;
+            gap: 15px;
         }
         
         .rating > input {
@@ -53,188 +260,762 @@
         .rating > label {
             position: relative;
             width: 1.1em;
-            font-size: 30px;
-            color: #ddd;
+            font-size: 40px;
+            color: #444;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
         
         .rating > label::before {
             content: "★";
             position: absolute;
-            opacity: 0;
+            opacity: 1;
+            color: #444;
+            transition: all 0.3s ease;
         }
         
         .rating > label:hover:before,
         .rating > label:hover ~ label:before {
-            opacity: 1 !important;
+            color: var(--star-color);
+            transform: scale(1.2);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
         
         .rating > input:checked ~ label:before {
-            opacity: 1;
+            color: var(--star-color);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
         
-        .rating > input:checked ~ label {
-            color: #FFD700;
+        .form-row {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 28px;
         }
         
-        .submit-btn {
-            background: var(--primary-color);
-            color: var(--secondary-color);
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: bold;
+        .form-col {
+            flex: 1;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
             cursor: pointer;
-            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 10px;
+        }
+        
+        .checkbox-group:hover {
+            background: rgba(255, 94, 148, 0.1);
+        }
+        
+        .checkbox-group input {
+            width: auto;
+            margin-right: 12px;
+            cursor: pointer;
+            position: relative;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
         
-        .submit-btn:hover {
-            background: var(--accent-color);
+        .checkbox-group input:checked {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .checkbox-group input:checked::after {
+            content: '✓';
+            position: absolute;
+            color: #000;
+            font-size: 14px;
+            font-weight: bold;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
             color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: none;
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 35px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(255, 94, 148, 0.3);
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 94, 148, 0.4);
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .submit-btn i {
+            margin-right: 10px;
+            font-size: 1.1em;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 35px;
+            font-size: 0.95rem;
+            color: #888;
+            position: relative;
+            padding-top: 20px;
+        }
+        
+        .form-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 25%;
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border-color), transparent);
+        }
+        
+        .form-footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .form-footer a:hover {
+            color: var(--primary-color);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 15px;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+        
+        .error-message {
+            color: #FF5370;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .form-tip {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
         }
         
         .thank-you {
             display: none;
             text-align: center;
-            padding: 30px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 40px auto;
+            padding: 60px 40px;
+            background: var(--card-color);
+            border-radius: 24px;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+            max-width: 650px;
+            margin: 40px auto 60px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .thank-you::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--success-color), var(--accent-color));
+            z-index: 2;
+        }
+        
+        .thank-you-icon {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .thank-you-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--success-color);
+            animation: ripple 2s infinite;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
         }
         
         .thank-you i {
-            font-size: 60px;
-            color: var(--primary-color);
-            margin-bottom: 20px;
+            font-size: 50px;
+            color: var(--success-color);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
         }
         
         .thank-you h2 {
-            color: var(--secondary-color);
-            margin-bottom: 15px;
+            color: var(--success-color);
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: 700;
         }
         
         .thank-you p {
-            margin-bottom: 10px;
-            font-size: 18px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #BBB;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .thank-you .download-btn {
-            margin-top: 25px;
+            margin-top: 35px;
             display: inline-block;
+            background: linear-gradient(to right, var(--success-color), var(--accent-color));
+            color: var(--secondary-color);
+            padding: 16px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.3);
+        }
+        
+        .thank-you .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(100, 255, 218, 0.4);
+        }
+        
+        .thank-you .download-btn i {
+            margin-right: 10px;
+            animation: none;
+            font-size: 1em;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #777;
+            font-size: 0.95rem;
+            position: relative;
+            margin-top: 40px;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 25%;
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border-color), transparent);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Floating elements animation */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.4;
+            filter: blur(10px);
+        }
+        
+        .float-1 {
+            width: 100px;
+            height: 100px;
+            background: var(--primary-color);
+            top: 20%;
+            left: 10%;
+            animation: float 15s infinite alternate;
+        }
+        
+        .float-2 {
+            width: 150px;
+            height: 150px;
+            background: var(--accent-color);
+            bottom: 10%;
+            right: 5%;
+            animation: float 20s infinite alternate-reverse;
+        }
+        
+        .float-3 {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-end);
+            top: 60%;
+            left: 5%;
+            animation: float 12s infinite alternate-reverse;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.8rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            .feedback-form {
+                padding: 30px;
+                margin: 30px auto 50px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .rating > label {
+                font-size: 35px;
+            }
+            
+            .thank-you {
+                padding: 40px 30px;
+            }
+            
+            .thank-you h2 {
+                font-size: 2rem;
+            }
+            
+            .thank-you p {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
+            .feedback-form {
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+            
+            .form-header h2 {
+                font-size: 1.6rem;
+            }
+            
+            .rating > label {
+                font-size: 30px;
+                gap: 10px;
+            }
+            
+            .submit-btn {
+                font-size: 16px;
+                padding: 14px 20px;
+            }
+            
+            .thank-you {
+                padding: 30px 20px;
+            }
+            
+            .thank-you-icon {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .thank-you i {
+                font-size: 40px;
+            }
+            
+            .thank-you h2 {
+                font-size: 1.8rem;
+            }
+            
+            .thank-you p {
+                font-size: 1rem;
+            }
+            
+            .thank-you .download-btn {
+                padding: 14px 25px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Floating background elements -->
+    <div class="floating-element float-1"></div>
+    <div class="floating-element float-2"></div>
+    <div class="floating-element float-3"></div>
+    
     <div class="container">
         <header>
-            <h1>App Feedback</h1>
-            <p>Help us improve your experience</p>
+            <h1>IView Feedback</h1>
+            <p>Your thoughts help us create a better experience</p>
         </header>
         
         <div class="feedback-form" id="feedbackForm">
-            <form id="appFeedback" action="https://formsubmit.co/tyagiakash2325@gmail.com" method="POST">
-                <!-- Hidden fields for FormSubmit configuration -->
-                <input type="hidden" name="_subject" value="New App Feedback">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://yourwebsite.com/feedback.html?submitted=true">
+            <div class="form-header">
+                <h2>Share Your Experience</h2>
+                <p>We'd love to hear what you think about IView</p>
+            </div>
+            
+            <form id="appFeedback" action="https://formspree.io/f/your-formspree-id" method="POST">
+                <!-- No need for hidden fields with Formspree -->
                 
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Rate Your Experience</label>
-                    <div class="rating">
-                        <input type="radio" id="star5" name="rating" value="5" required>
-                        <label for="star5" title="5 stars">★</label>
-                        <input type="radio" id="star4" name="rating" value="4">
-                        <label for="star4" title="4 stars">★</label>
-                        <input type="radio" id="star3" name="rating" value="3">
-                        <label for="star3" title="3 stars">★</label>
-                        <input type="radio" id="star2" name="rating" value="2">
-                        <label for="star2" title="2 stars">★</label>
-                        <input type="radio" id="star1" name="rating" value="1">
-                        <label for="star1" title="1 star">★</label>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                                <span class="input-icon"><i class="fas fa-user"></i></span>
+                            </div>
+                            <div class="error-message" id="nameError">Please enter your name</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <div class="input-wrapper">
+                                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                                <span class="input-icon"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <div class="error-message" id="emailError">Please enter a valid email</div>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="deviceType">Device Type</label>
-                    <select id="deviceType" name="deviceType" required>
-                        <option value="">Select your device</option>
-                        <option value="Samsung">Samsung</option>
-                        <option value="Google Pixel">Google Pixel</option>
-                        <option value="OnePlus">OnePlus</option>
-                        <option value="Xiaomi">Xiaomi</option>
-                        <option value="Oppo">Oppo</option>
-                        <option value="Vivo">Vivo</option>
-                        <option value="Other">Other</option>
-                    </select>
+                    <label>How would you rate your experience?</label>
+                    <div class="rating-container">
+                        <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" required>
+                            <label for="star5" title="5 stars">★</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4" title="4 stars">★</label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3" title="3 stars">★</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2" title="2 stars">★</label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1" title="1 star">★</label>
+                        </div>
+                        <div class="error-message" id="ratingError">Please rate your experience</div>
+                    </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="feedback">Your Feedback</label>
-                    <textarea id="feedback" name="feedback" placeholder="Tell us what you like or how we can improve..." required></textarea>
+                    <label for="deviceType">What device are you using?</label>
+                    <div class="input-wrapper">
+                        <select id="deviceType" name="deviceType" required>
+                            <option value="">Select your device</option>
+                            <option value="Samsung">Samsung</option>
+                            <option value="Google Pixel">Google Pixel</option>
+                            <option value="OnePlus">OnePlus</option>
+                            <option value="Xiaomi">Xiaomi</option>
+                            <option value="Oppo">Oppo</option>
+                            <option value="Vivo">Vivo</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span class="input-icon"><i class="fas fa-mobile-alt"></i></span>
+                    </div>
+                    <div class="error-message" id="deviceError">Please select your device</div>
                 </div>
                 
-                <button type="submit" class="submit-btn">Submit Feedback</button>
+                <div class="form-group">
+                    <label for="appVersion">Which app version are you using?</label>
+                    <div class="input-wrapper">
+                        <select id="appVersion" name="appVersion" required>
+                            <option value="">Select app version</option>
+                            <option value="1.0.0">1.0.0 (Latest)</option>
+                            <option value="0.9.5">0.9.5</option>
+                            <option value="0.9.0">0.9.0</option>
+                            <option value="Other">Other/Not sure</option>
+                        </select>
+                        <span class="input-icon"><i class="fas fa-code-branch"></i></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="feedback">Tell us about your experience</label>
+                    <div class="input-wrapper">
+                        <textarea id="feedback" name="feedback" placeholder="What did you like? What could be improved? Any issues you faced?" required></textarea>
+                        <span class="input-icon" style="top: 20px;"><i class="fas fa-comment-dots"></i></span>
+                    </div>
+                    <div class="form-tip">Your detailed feedback helps us make IView better for everyone</div>
+                    <div class="error-message" id="feedbackError">Please share your feedback</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Which features would you like to see next?</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="feature1" name="features" value="Dark Mode">
+                        <label for="feature1">Dark Mode</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="feature2" name="features" value="Video Sharing">
+                        <label for="feature2">Video Sharing</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="feature3" name="features" value="Direct Messaging">
+                        <label for="feature3">Direct Messaging</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="feature4" name="features" value="Stories">
+                        <label for="feature4">Stories Feature</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i> Send Feedback
+                </button>
+                
+                <div class="form-footer">
+                    By submitting this form, you agree to our <a href="#">Privacy Policy</a>
+                    <br>
+                    <a href="index.html" class="back-link">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                </div>
             </form>
         </div>
         
         <div class="thank-you" id="thankYou">
-            <i class="fas fa-check-circle"></i>
+            <div class="thank-you-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
             <h2>Thank You!</h2>
             <p>Your feedback has been submitted successfully.</p>
-            <p>We appreciate your input and will use it to improve our app.</p>
-            <a href="index.html" class="download-btn android-btn">
+            <p>We appreciate you taking the time to share your thoughts with us.</p>
+            <a href="index.html" class="download-btn">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
         </div>
         
         <footer>
-            <p>&copy; 2023 My Android App. All rights reserved.</p>
+            <p>&copy; 2025 IView App. All rights reserved.</p>
         </footer>
     </div>
     
     <script>
-        // Check if form was submitted
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('submitted') === 'true') {
-                document.getElementById('feedbackForm').style.display = 'none';
-                document.getElementById('thankYou').style.display = 'block';
+        // Form validation
+        const form = document.getElementById('appFeedback');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const feedbackInput = document.getElementById('feedback');
+        const deviceSelect = document.getElementById('deviceType');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        // Error messages
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const feedbackError = document.getElementById('feedbackError');
+        const deviceError = document.getElementById('deviceError');
+        const ratingError = document.getElementById('ratingError');
+        
+        // Form validation functions
+        function validateName() {
+            if (nameInput.value.trim() === '') {
+                nameError.style.display = 'block';
+                return false;
+            } else {
+                nameError.style.display = 'none';
+                return true;
             }
-        };
+        }
+        
+        function validateEmail() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value)) {
+                emailError.style.display = 'block';
+                return false;
+            } else {
+                emailError.style.display = 'none';
+                return true;
+            }
+        }
+        
+        function validateFeedback() {
+            if (feedbackInput.value.trim() === '') {
+                feedbackError.style.display = 'block';
+                return false;
+            } else {
+                feedbackError.style.display = 'none';
+                return true;
+            }
+        }
+        
+        function validateDevice() {
+            if (deviceSelect.value === '') {
+                deviceError.style.display = 'block';
+                return false;
+            } else {
+                deviceError.style.display = 'none';
+                return true;
+            }
+        }
+        
+        function validateRating() {
+            const ratingInputs = document.querySelectorAll('input[name="rating"]');
+            let isChecked = false;
+            
+            ratingInputs.forEach(input => {
+                if (input.checked) {
+                    isChecked = true;
+                }
+            });
+            
+            if (!isChecked) {
+                ratingError.style.display = 'block';
+                return false;
+            } else {
+                ratingError.style.display = 'none';
+                return true;
+            }
+        }
+        
+        // Add event listeners for real-time validation
+        nameInput.addEventListener('blur', validateName);
+        emailInput.addEventListener('blur', validateEmail);
+        feedbackInput.addEventListener('blur', validateFeedback);
+        deviceSelect.addEventListener('change', validateDevice);
+        
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            // Don't prevent default submission - let the form submit naturally
+            // e.preventDefault(); - REMOVE THIS LINE
+            
+            // Validate all fields
+            const isNameValid = validateName();
+            const isEmailValid = validateEmail();
+            const isFeedbackValid = validateFeedback();
+            const isDeviceValid = validateDevice();
+            const isRatingValid = validateRating();
+            
+            // If any validation fails, prevent form submission
+            if (!isNameValid || !isEmailValid || !isFeedbackValid || !isDeviceValid || !isRatingValid) {
+                e.preventDefault(); // Only prevent submission if validation fails
+                return;
+            }
+            
+            // Show loading state on button
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Let the form submit naturally - no need to call form.submit()
+        });
         
         // Star rating functionality
         const stars = document.querySelectorAll('.rating label');
         stars.forEach(star => {
             star.addEventListener('click', () => {
-                stars.forEach(s => s.style.color = '#ddd');
-                let currentStar = star;
-                while (currentStar) {
-                    currentStar.style.color = '#FFD700';
-                    currentStar = currentStar.previousElementSibling;
-                    if (currentStar && currentStar.tagName !== 'LABEL') {
-                        currentStar = currentStar.previousElementSibling;
-                    }
-                }
+                ratingError.style.display = 'none';
             });
         });
     </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
